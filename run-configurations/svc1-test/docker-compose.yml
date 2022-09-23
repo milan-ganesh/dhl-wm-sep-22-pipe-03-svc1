@@ -2,17 +2,14 @@ version: '3.8'
 services:
 
  msr-lean:
-  image: ${CONTAINER_REGISTRY_URL}/${CONTAINER_IMAGE_REPOSITORY}:${CONTAINER_IMAGE_TAG} 
+  #build: ../../
+  image: ${TEST_CONTAINER_IMAGE} 
   ports:
     - ${HOST_PORT_PREFIX}55:5555
   volumes:
    - ${MY_MSR_LICENSE_FILE}:/tmp/license.xml
    - ./application.properties:/tmp/application.properties
-   - ../../:/mnt/project-home/
-   - ./local/:/mnt/local/
-   - ./scripts/:/mnt/scripts/
-   - ../../code/is-packages/MyNewService:${GUEST_IS_HOME}/packages/MyNewService/
-   - ../../code/is-packages/MyMailService:${GUEST_IS_HOME}/packages/MyMailService/
+  
   environment:
    - SAG_IS_LICENSE_FILE=/tmp/license.xml
    - SAG_IS_CONFIG_PROPERTIES=/tmp/application.properties
@@ -24,4 +21,3 @@ services:
    - NEWSAPI_BASE_URL
    - NEWSAPI_API_KEY
 
-  #entrypoint: /mnt/scripts/entrypoint.sh
